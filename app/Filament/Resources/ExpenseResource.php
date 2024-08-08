@@ -8,7 +8,9 @@ use App\Models\Expense;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -40,11 +42,27 @@ class ExpenseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('amount')->money('USD'),
-                Tables\Columns\TextColumn::make('date')->date(),
-                Tables\Columns\TextColumn::make('category.name')->label('Category'),
-                Tables\Columns\TextColumn::make('user.name')->label('User'),
+                Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
+                TextColumn::make('amount')
+                    ->label('Amount')
+                    ->sortable()
+                    ->searchable()
+                    ->formatStateUsing(fn($state) => number_format($state, 2) . ' MAD')
+                    ->extraAttributes(['class' => 'text-right'])
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('date')->date()->sortable()->searchable()
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Utilities' => 'success',
+                        'Food & Dining' => 'warning',
+                        'Transportation' => 'info',
+                        'Entertainment' => 'primary',
+                        'Healthcare' => 'danger',
+                        default => 'secondary',
+                    })->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('user.name')->label('User')->sortable()->searchable(),
             ])
             ->filters([
                 //

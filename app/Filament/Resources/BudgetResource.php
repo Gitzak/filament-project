@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -38,10 +39,15 @@ class BudgetResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('amount')->money('USD'),
-                Tables\Columns\TextColumn::make('category.name')->label('Category'),
-                Tables\Columns\TextColumn::make('user.name')->label('User'),
-                Tables\Columns\TextColumn::make('created_at')->date(),
+                TextColumn::make('amount')
+                    ->label('Amount')
+                    ->sortable()
+                    ->searchable()
+                    ->formatStateUsing(fn($state) => number_format($state, 2) . ' MAD')
+                    ->extraAttributes(['class' => 'text-right']),
+                Tables\Columns\TextColumn::make('category.name')->label('Category')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('user.name')->label('User')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('created_at')->date()->sortable()->searchable(),
             ])
             ->filters([
                 //
