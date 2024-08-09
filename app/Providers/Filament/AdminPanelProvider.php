@@ -35,6 +35,8 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->sidebarCollapsibleOnDesktop()
             ->favicon(asset('favicon.ico'))
             ->brandName('APP MANAGER')
             ->brandLogo(asset('images/Logo_purple_capsule.png'))

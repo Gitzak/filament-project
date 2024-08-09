@@ -22,6 +22,16 @@ class BudgetResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['amount', 'category.name'];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return 'Ljadid';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
