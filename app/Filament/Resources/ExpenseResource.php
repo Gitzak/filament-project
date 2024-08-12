@@ -29,7 +29,6 @@ class ExpenseResource extends Resource
     {
         return ['title', 'amount', 'category.name'];
     }
-
     public static function form(Form $form): Form
     {
         return $form
