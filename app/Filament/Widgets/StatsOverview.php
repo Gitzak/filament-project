@@ -17,11 +17,11 @@ class StatsOverview extends BaseWidget
         $totalCategories = Category::count();
 
         return [
-            Stat::make('Total Budget', number_format($totalBudgets, 2))
+            Stat::make('Total Budget', number_format($totalBudgets, 2).' MAD')
                 ->description('Total allocated budget')
                 ->color('success'),
 
-            Stat::make('Total Expenses', number_format($totalExpenses, 2))
+            Stat::make('Total Expenses', number_format($totalExpenses, 2).' MAD')
                 ->description('Total expenses so far')
                 ->color('danger'),
 
