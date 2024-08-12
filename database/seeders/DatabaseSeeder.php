@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder
         // php artisan migrate:refresh --seed
         
         $this->call([
-            CategorySeeder::class,
             AdminUserSeeder::class,
+            CategorySeeder::class,
+            BudgetSeeder::class,
+            ExpenseSeeder::class
         ]);
     }
 }
