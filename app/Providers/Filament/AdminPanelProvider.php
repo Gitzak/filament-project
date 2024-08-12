@@ -22,6 +22,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -71,6 +73,10 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                FilamentBackgroundsPlugin::make()->imageProvider(
+                    MyImages::make()
+                        ->directory('images/backgrounds')
+                ),
                 FilamentEditProfilePlugin::make()
                     ->setIcon('heroicon-o-user')
                     ->shouldShowAvatarForm(
