@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BudgetResource\Pages;
 use App\Filament\Resources\BudgetResource\RelationManagers;
+use App\Filament\Resources\BudgetResource\Widgets\BudgetStats;
 use App\Models\Budget;
 use Filament\Forms;
 use Filament\Forms\Form;
