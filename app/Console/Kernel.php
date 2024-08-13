@@ -14,8 +14,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('app:log-current-time')->everySecond();
-        $schedule->command('restore:initial-data')->hourly();
+        // $schedule->command('app:log-current-time')->everySecond();
+        // $schedule->command('app:restore-initial-data')->hourly();
     }
 
     /**
